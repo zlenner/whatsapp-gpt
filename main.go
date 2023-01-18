@@ -38,8 +38,13 @@ func (mycli *MyClient) eventHandler(evt interface{}) {
 		if msg == "" {
 			return
 		}
+		HOST_NAME := "http://localhost:5001"
+		if os.Getenv("HOST_NAME") != "" {
+			HOST_NAME = os.Getenv("HOST_NAME")
+		}
+
 		// Make a http request to localhost:5001/chat/:from_id/:query with the message, and send the response
-		url := "http://localhost:5001/chat/" + v.Info.Sender.User + "/" + msg
+		url := HOST_NAME + "/chat/" + v.Info.Sender.User + "/" + msg
 		// Make the request
 		resp, err := http.Get(url)
 		if err != nil {
@@ -61,9 +66,14 @@ func (mycli *MyClient) eventHandler(evt interface{}) {
 }
 
 func main() {
+	DB_PATH := "examplestore.db"
+	if os.Getenv("DB_PATH") != "" {
+		DB_PATH = os.Getenv("DB_PATH")
+	}
+
 	dbLog := waLog.Stdout("Database", "DEBUG", true)
 	// Make sure you add appropriate DB connector imports, e.g. github.com/mattn/go-sqlite3 for SQLite
-	container, err := sqlstore.New("sqlite3", "file:examplestore.db?_foreign_keys=on", dbLog)
+	container, err := sqlstore.New("sqlite3", "file:"+DB_PATH+"?_foreign_keys=on", dbLog)
 	if err != nil {
 		panic(err)
 	}
