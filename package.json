@@ -1,0 +1,25 @@
+{
+  "name": "whatsapp-gpt",
+  "version": "1.0.0",
+  "description": "* You'll need to run WhatsApp from a phone number using the golang library I'm using. * You'll run a dedicated browser in another window that's controlling ChatGPT. * Two terminals: `go run main.go`, and `python server.py`. I am extremely doubtful they will work for you on the first run. * This marks the end of the readme file; it is a bit sparse; thankfully the code is too! Just tuck in if you can... and I will try to add more here later.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx vite-node src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zlenner/whatsapp-gpt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zlenner/whatsapp-gpt/issues"
+  },
+  "homepage": "https://github.com/zlenner/whatsapp-gpt#readme",
+  "dependencies": {
+    "almostmagic": "^0.0.14",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.11.0"
+  }
+}

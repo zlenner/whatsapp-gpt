@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 	"os"
 	"os/signal"
 	"syscall"
@@ -39,10 +38,8 @@ func (mycli *MyClient) eventHandler(evt interface{}) {
 		if msg == "" {
 			return
 		}
-		// Make a http request to localhost:5001/chat?q= with the message, and send the response
-		// URL encode the message
-		urlEncoded := url.QueryEscape(msg)
-		url := "http://localhost:5001/chat?q=" + urlEncoded
+		// Make a http request to localhost:5001/chat/:from_id/:query with the message, and send the response
+		url := "http://localhost:5001/chat/" + v.Info.Sender.User + "/" + msg
 		// Make the request
 		resp, err := http.Get(url)
 		if err != nil {
